@@ -2,8 +2,6 @@
 
 [https://thomas2clo.github.io/arpel/](https://thomas2clo.github.io/arpel/)
 
-a-r-p-e-l is a basic Web App, which means you can save the website as bookmark and add it to your Home Screen on mobile iOS
-
 
 
 ---
