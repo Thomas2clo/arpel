@@ -1,0 +1,9 @@
+.header {
+	padding: 24px 0;
+
+	&__h1 {
+		font-size: var(--font-size-xl);
+		text-align: center;
+		font-weight: 600;
+	}
+}

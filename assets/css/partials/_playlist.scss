@@ -1,0 +1,77 @@
+@media screen and (max-width: 500px) {
+	.plyr .plyr__controls button[data-plyr='pip'],
+	.plyr .plyr__controls button[data-plyr='mute'],
+	.plyr .plyr__controls button[data-plyr='restart'],
+	.plyr .plyr__controls button[data-plyr='volume'] {
+		display: none;
+	}
+}
+
+.container {
+	&__status {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		#current_title {
+			flex: 0 auto;
+		}
+
+		#status {
+			flex: 0 auto;
+
+			&:before {
+				content: '(';
+				margin-left: 10px;
+			}
+
+			&:after {
+				content: ')';
+			}
+		}
+	}
+
+	&__audio {
+	}
+
+	&__playlist {
+		margin-top: 24px;
+
+		> ul {
+			.song {
+				background-color: var(--neutral-01);
+				color: var(--dark);
+				display: flex;
+				justify-content: flex-start;
+				align-items: flex-start;
+				padding: 14px 16px;
+				margin-top: 8px;
+				border-radius: 6px;
+				cursor: pointer;
+
+				&:first-child {
+					margin-top: none;
+				}
+
+				&.selected {
+					background-color: var(--neutral-02);
+					color: var(--dark);
+				}
+
+				&__num {
+					flex: 0 auto;
+					width: 40px;
+				}
+
+				&__title {
+					flex: 1 1 auto;
+				}
+
+				&__length {
+					flex: 0 auto;
+					padding-left: 10px;
+				}
+			}
+		}
+	}
+}

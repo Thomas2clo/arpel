@@ -4,10 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "webpack",
-		"start": "webpack serve",
-		"heroku-prebuild": "",
-		"heroku-postbuild": "webpack"
+		"dev": "webpack --mode development --watch",
+		"build": "webpack --mode production"
 	},
 	"keywords": [],
 	"author": "",
