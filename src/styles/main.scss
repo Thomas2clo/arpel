@@ -1,0 +1,118 @@
+:root {
+	--font-family: 'HelveticaNeue-Regular', 'Helvetica Neue Regular',
+		'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	--font-weight: 400;
+	--font-size: 14px;
+	--font-size-xl: 24px;
+
+	--primary: #3f3f3f;
+	--light: #fff;
+	--dark: #111;
+	--neutral-01: #e8e8e8;
+	--neutral-02: #cacaca;
+	--neutral-03: #8c8c8c;
+	--neutral-04: #3f3f3f;
+
+	--plyr-color-main: var(--primary);
+	--plyr-badge-background: var(--dark);
+	--plyr-badge-border-radius: 0px;
+	--plyr-audio-progress-buffered-background: var(--neutral-02);
+	--plyr-audio-range-track-background: var(--neutral-01);
+	--plyr-font-family: var(--font-family);
+	--plyr-audio-control-color: var(--dark);
+}
+
+html {
+	font-family: var(--font-family);
+	font-size: var(--font-size);
+	font-weight: var(--font-weight);
+	color: var(--dark);
+}
+
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 500px) {
+	.plyr .plyr__controls button[data-plyr='pip'],
+	.plyr .plyr__controls button[data-plyr='mute'],
+	.plyr .plyr__controls button[data-plyr='restart'],
+	.plyr .plyr__controls button[data-plyr='volume'] {
+		display: none;
+	}
+}
+
+.container {
+	padding: 0 24px;
+
+	&__header {
+		padding: 24px 0;
+
+		&__h1 {
+			font-size: var(--font-size-xl);
+			text-align: center;
+			font-weight: 600;
+		}
+	}
+
+	&__wrapper {
+		&__status {
+			display: flex;
+
+			#current {
+				flex: 1 1 auto;
+				width: 50%;
+			}
+
+			#status {
+				flex: 1 1 auto;
+				width: 50%;
+			}
+		}
+
+		&__playlist {
+			margin-top: 24px;
+
+			> ul {
+				.song {
+					background-color: var(--neutral-01);
+					color: var(--dark);
+					display: flex;
+					justify-content: flex-start;
+					align-items: flex-start;
+					padding: 14px 16px;
+					margin-top: 8px;
+					border-radius: 6px;
+					cursor: pointer;
+
+					&:first-child {
+						margin-top: none;
+					}
+
+					&.selected {
+						background-color: var(--neutral-02);
+						color: var(--dark);
+					}
+
+					&__num {
+						flex: 0 auto;
+						width: 40px;
+					}
+
+					&__title {
+						flex: 1 1 auto;
+					}
+
+					&__length {
+						flex: 0 auto;
+						padding-left: 10px;
+					}
+				}
+			}
+		}
+	}
+}
