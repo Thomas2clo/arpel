@@ -33,59 +33,12 @@ $(function() {
 			playing = false,
 			path = 'assets/sounds/',
 			extension = '',
-			tracks = [
-				{
-					name: 'Dans ma Folie',
-					duration: '2:55',
-					file: 'dans-ma-folie'
-				},
-				{
-					name: 'Hasta la Muerte',
-					duration: '4:49',
-					file: 'hasta-la-muerte'
-				},
-				{
-					name: 'Medellín',
-					duration: '3:52',
-					file: 'medellin'
-				}
-			],
-			build_playlist = $.each(tracks, function(key, value) {
-				var track_number = key + 1;
+			tracks = [],
+			track_count = 0;
 
-				var song = document.createElement('li'),
-					song_number = document.createElement('span'),
-					song_name = document.createElement('span'),
-					song_duration = document.createElement('span');
-				$(song).addClass('song');
-				$(song_number)
-					.addClass('song__num')
-					.text(
-						track_number.toString().length === 1
-							? `0${track_number}`
-							: track_number
-					);
-				$(song_name)
-					.addClass('song__title')
-					.text(value.name);
-				$(song_duration)
-					.addClass('song__length')
-					.text(value.duration);
+		load_playlist();
 
-				$(song)
-					.append(song_number)
-					.append(song_name)
-					.append(song_duration)
-					.on('click', function() {
-						var id = parseInt($(this).index());
-						playTrack(id);
-						// if (id !== index) {}
-					});
-
-				$(playlist).append(song);
-			}),
-			track_count = tracks.length,
-			audio = $('#player')
+		var audio = $('#player')
 				.on('play', function() {
 					playing = true;
 					$(status).text('Playing');
@@ -107,37 +60,12 @@ $(function() {
 					}
 				})
 				.get(0),
-			// btnPrev = $('#btn__prev').on('click', function() {
-			// 	if (index - 1 > -1) {
-			// 		index--;
-			// 		loadTrack(index);
-			// 		if (playing) {
-			// 			audio.play();
-			// 		}
-			// 	} else {
-			// 		audio.pause();
-			// 		index = 0;
-			// 		loadTrack(index);
-			// 	}
-			// }),
-			// btnNext = $('#btn__next').on('click', function() {
-			// 	if (index + 1 < track_count) {
-			// 		index++;
-			// 		loadTrack(index);
-			// 		if (playing) {
-			// 			audio.play();
-			// 		}
-			// 	} else {
-			// 		audio.pause();
-			// 		index = 0;
-			// 		loadTrack(index);
-			// 	}
-			// }),
 			loadTrack = function(id) {
 				$('.selected').removeClass('selected');
 				$(playlist)
 					.find('li:eq(' + id + ')')
 					.addClass('selected');
+
 				$(current_title).text(tracks[id].name);
 				index = id;
 				audio.src = path + tracks[id].file + extension;
@@ -152,15 +80,69 @@ $(function() {
 				loadTrack(id);
 				audio.play();
 			};
+
 		extension = audio.canPlayType('audio/mpeg')
 			? '.mp3'
 			: audio.canPlayType('audio/ogg')
 			? '.ogg'
 			: '';
-		loadTrack(index);
 	} else {
 		// no audio support
 		var noSupport = $(audio).text();
 		$(wrapper).append('<p class="no-support">' + noSupport + '</p>');
+	}
+
+	function load_playlist() {
+		$.getJSON('playlist.json', function(json) {
+			$.each(json, function(key, value) {
+				tracks.push(value);
+			});
+			track_count = tracks.length;
+		})
+			.done(function(data) {})
+			.fail(function() {
+				console.log('error');
+			})
+			.always(function() {
+				build_playlist();
+				loadTrack(index);
+			});
+	}
+
+	function build_playlist() {
+		$.each(tracks, function(key, value) {
+			var track_number = key + 1;
+
+			var song = document.createElement('li'),
+				song_number = document.createElement('span'),
+				song_name = document.createElement('span'),
+				song_duration = document.createElement('span');
+			$(song).addClass('song');
+			$(song_number)
+				.addClass('song__num')
+				.text(
+					track_number.toString().length === 1
+						? `0${track_number}`
+						: track_number
+				);
+			$(song_name)
+				.addClass('song__title')
+				.text(value.name);
+			$(song_duration)
+				.addClass('song__length')
+				.text(value.duration);
+
+			$(song)
+				.append(song_number)
+				.append(song_name)
+				.append(song_duration)
+				.on('click', function() {
+					var id = parseInt($(this).index());
+					playTrack(id);
+					// if (id !== index) {}
+				});
+
+			$(playlist).append(song);
+		});
 	}
 });
