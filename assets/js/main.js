@@ -31,7 +31,7 @@ $(function() {
 
 		var index = 0,
 			playing = false,
-			path = 'assets/sounds/',
+			path = '/assets/sounds/',
 			extension = '',
 			tracks = [],
 			track_count = 0;
@@ -93,7 +93,7 @@ $(function() {
 	}
 
 	function load_playlist() {
-		$.getJSON('playlist.json', function(json) {
+		$.getJSON('/playlist.json', function(json) {
 			$.each(json, function(key, value) {
 				tracks.push(value);
 			});
