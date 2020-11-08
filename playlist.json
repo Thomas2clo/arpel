@@ -13,5 +13,10 @@
 		"name": "Medellín",
 		"duration": "3:52",
 		"file": "medellin"
+	},
+	{
+		"name": "Moneygram",
+		"duration": "3:20",
+		"file": "moneygram"
 	}
 ]
