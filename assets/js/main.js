@@ -31,7 +31,7 @@ $(function() {
 
 		var index = 0,
 			playing = false,
-			path = '/assets/sounds/',
+			path = './assets/sounds/',
 			extension = '',
 			tracks = [],
 			track_count = 0;
@@ -93,15 +93,16 @@ $(function() {
 	}
 
 	function load_playlist() {
-		$.getJSON('/playlist.json', function(json) {
-			$.each(json, function(key, value) {
+		$.getJSON('./playlist.json', function(data) {
+			$.each(data, function(key, value) {
 				tracks.push(value);
+				console.log(value);
 			});
 			track_count = tracks.length;
 		})
-			.done(function(data) {})
 			.fail(function() {
 				console.log('error');
+				alert('error, plese try again');
 			})
 			.always(function() {
 				build_playlist();
